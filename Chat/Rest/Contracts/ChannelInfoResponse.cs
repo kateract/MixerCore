@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace MixerCore.Chat.Http.Contracts
+namespace MixerCore.Chat.Rest.Contracts
 {
     [JsonObject]
     public class ChannelInfoResponse

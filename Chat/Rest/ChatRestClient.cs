@@ -5,16 +5,16 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using MixerCore.Authentication;
-using MixerCore.Chat.Http.Contracts;
+using MixerCore.Chat.Rest.Contracts;
 using MixerCore.Rest;
 using Newtonsoft.Json;
 
-namespace MixerCore.Chat.Http
+namespace MixerCore.Chat.Rest
 {
     /// <summary>
     /// A client for Mixer's http REST API's
     /// </summary>
-    public class HttpClient : MixerRestBase
+    public class ChatRestClient : MixerRestBase
     {
         private static readonly string chatConnectionInfoUri = "https://mixer.com/api/v1/chats/{0}";
         private static readonly string currentUserInfoUri = "https://mixer.com/api/v1/users/current";
@@ -23,7 +23,7 @@ namespace MixerCore.Chat.Http
         /// Constructor.
         /// </summary>
         /// <param name="auth">Optional auth token.</param>
-        public HttpClient(AuthInfo auth) : base(auth) {}
+        public ChatRestClient(AuthInfo auth) : base(auth) {}
 
         /// <summary>
         /// Prepares the user to join a chat channel. It returns the channel's chatroom settings, available chat servers, and an authentication key that the user (if authenticated) should use to authenticate with the chat servers over websockets.

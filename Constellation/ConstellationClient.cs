@@ -5,16 +5,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using MixerCore.WebSocket;
 using MixerCore.WebSocket.Contracts;
-using MixerCore.Constellation.Contracts;
+using MixerCore.Constellation.Messages;
 
 namespace MixerCore.Constellation
 {
     public class ConstellationClient : WebSocketClientBase
     {
-        public ConstellationClient() : base()
-        {
-            server = "wss:////constellation.mixer.com";
-        }
+        public ConstellationClient() : base() => server = @"wss://constellation.mixer.com";
 
         public async Task ConnectAsync(ConstellationConnectionInformation constellationConnectionInformation, uint channelId, uint userId)
         {

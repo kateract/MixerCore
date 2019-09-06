@@ -8,34 +8,20 @@ namespace MixerCore.Rest
 {
     public class MixerRestBase : HttpClient
     {
-        private AuthInfo authInfo;
+        private readonly AuthInfo authInfo;
 
-        public MixerRestBase(AuthInfo auth = null) : base(CreateWebRequestHandler(), true)
-        {
-            authInfo = auth;
-        }
+        public MixerRestBase(AuthInfo auth = null) : base(CreateWebRequestHandler(), true) => authInfo = auth;
+        public MixerRestBase() : base(CreateWebRequestHandler(), true) { }
 
         /// <summary>
         /// Gets the type of token
         /// </summary>
-        protected string AuthenticationScheme
-        {
-            get
-            {
-                return authInfo.TokenType;
-            }
-        }
+        protected string AuthenticationScheme => authInfo.TokenType;
 
         /// <summary>
         /// Gets the OAuth access token
         /// </summary>
-        protected string AccessToken
-        {
-            get
-            {
-                return authInfo.AccessToken;
-            }
-        }
+        protected string AccessToken => authInfo.AccessToken;
 
         /// <summary>
         /// Helper method to set the handler settings for this HttpClient

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MixerCore.Rest;
 using Newtonsoft.Json;
+using MixerCore.Authentication.Contracts;
 
 namespace MixerCore.Authentication 
 {
@@ -26,7 +27,7 @@ namespace MixerCore.Authentication
         /// <see cref="https://mixer.com/lab/oauth" />
         /// <param name="clientId">The OAuth client id. </param>
         /// <param name="clientSecret"> The OAuth client secret, only required if the OAuth client in use has one. </param>
-        public AuthClient(string clientId, string clientSecret) : base(null)
+        public AuthClient(string clientId, string clientSecret)
         {
             this.clientId = clientId;
             this.clientSecret = clientSecret;
@@ -72,7 +73,7 @@ namespace MixerCore.Authentication
                 request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
                 using (var response = await SendAsync(request))
                 {
-                    return await GetResponseAsync<Contracts.ShortCodeResponse>(response);
+                    return await GetResponseAsync<ShortCodeResponse>(response);
                 }
             }
         }
@@ -89,7 +90,7 @@ namespace MixerCore.Authentication
             {
                 using (var response = await SendAsync(request))
                 {
-                    return await GetResponseAsync<Contracts.CodeResponse>(response);
+                    return await GetResponseAsync<CodeResponse>(response);
                 }
             }
         }
@@ -115,7 +116,7 @@ namespace MixerCore.Authentication
                 request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
                 using(var response = await SendAsync(request))
                 {
-                    var token = await GetResponseAsync<Contracts.TokenResponse>(response);
+                    var token = await GetResponseAsync<TokenResponse>(response);
                     var info = new AuthInfo {
                         AccessToken = token.access_token,
                         RefreshToken = token.refresh_token,
@@ -140,7 +141,7 @@ namespace MixerCore.Authentication
                 request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
                 using(var response = await SendAsync(request))
                 {
-                    var token = await GetResponseAsync<Contracts.TokenResponse>(response);
+                    var token = await GetResponseAsync<TokenResponse>(response);
                     var info = new AuthInfo {
                         AccessToken = token.access_token,
                         RefreshToken = token.refresh_token,
